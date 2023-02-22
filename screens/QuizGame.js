@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FlatList, Text, View } from "react-native"
+import { FlatList, Text, View, StyleSheet} from "react-native"
 import DataHook from "../hooks/DataHook"
 import AppLoading from 'expo-app-loading';
 import QuizList from "../components/quiz_ui/QuizList";
@@ -9,12 +9,7 @@ function QuizGame(){
 
     const [ data,category, loading, error ,  getQuizData] = DataHook()
     
-    const [gameState,setGameState] = useState(false)
-    
-    const [answer,setAnswer] = useState([])
-
-    const [correct,setCorrect] = useState(0)
-
+   
     if(loading){
         return <AppLoading 
             
@@ -23,7 +18,7 @@ function QuizGame(){
 
     
     return (
-        <View>
+        <View style = {styles.container}>
             
             <QuizList 
                 data = {data} 
@@ -36,3 +31,15 @@ function QuizGame(){
 }
 
 export default QuizGame
+
+const styles = StyleSheet.create({
+   
+    container : {
+        flex : 1,
+        alignItems : 'center' ,
+       
+        
+    }
+   
+   
+})

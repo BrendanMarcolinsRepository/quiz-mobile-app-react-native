@@ -5,7 +5,7 @@ function UniversalButton({children, onPress}){
     return(
         <Pressable
         style = {(pressed) => [styles.button, pressed && styles.pressed]}
-        onPress = {onPress}
+        onPress = {onPress.bind(this,children)}
     >
         <Text style = {styles.text}>
             {children}
