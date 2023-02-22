@@ -54,7 +54,7 @@ function QuizList({data}){
     if(!gameState){
 
         function gameStateFunction(){
-            setGameState(!prev)
+            setGameState(true)
         }
 
         return(
