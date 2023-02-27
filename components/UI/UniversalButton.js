@@ -1,10 +1,10 @@
 import { Pressable, Text, StyleSheet} from "react-native"
 
-function UniversalButton({children, onPress}){
+function UniversalButton({children, onPress, customStyle}){
 
     return(
         <Pressable
-        style = {(pressed) => [styles.button, pressed && styles.pressed]}
+        style = {(pressed) => [customStyle ? customStyle : styles.button , pressed && styles.pressed]}
         onPress = {onPress.bind(this,children)}
     >
         <Text style = {styles.text}>
@@ -20,8 +20,8 @@ export default UniversalButton
 const styles = StyleSheet.create({
 
     button : {
-        paddingHorizontal : 6,
-        paddingVertical : 6,
+        paddingHorizontal : 12,
+        paddingVertical : 12,
         margin : 4,
         backgroundColor : '#d6cce4',
         
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         shadowOpacity : '0.15',
         shadowOffset : {width : 1, height : 1},
         shadowRadius : 2,
-        borderRadius : 4
+        borderRadius : 4, 
     },
 
     pressed : {

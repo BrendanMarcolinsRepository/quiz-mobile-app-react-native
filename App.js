@@ -9,12 +9,14 @@ import Leaderboards from './screens/Leaderboards';
 import IconButton from './components/UI/IconButton';
 import { Provider } from 'react-redux';
 import store from './redux';
+import { ContextProvider } from './context/QuestionNumberContext/numbercontext';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
     <Provider store = {store}>
+      <ContextProvider>
       <>
         <StatusBar style='dark'/>
         <NavigationContainer>
@@ -37,12 +39,13 @@ export default function App() {
                       name = 'Homepage'
                       component={Homepage}
                       options = {({navigation}) => ({
-                          title : 'Home',
+                          title : '',
                           headerRight : ({ tintColor }) => (
                             <IconButton 
                                 icon = "add"
                                 size = {24}
                                 color = {tintColor}
+                                text = {'Submit a Question'}
                                 onPress = {() => navigation.navigate('AddQuestion')}
                             />
                         )
@@ -54,7 +57,7 @@ export default function App() {
                       name = 'QuizGame'
                       component={QuizGame}
                       options = {{
-                        title : 'Add Questions',
+                        title : '',
                         
                       }}
                   
@@ -64,7 +67,7 @@ export default function App() {
                       name = 'Leaderboards'
                       component={Leaderboards}
                       options = {{
-                        title : 'Add Questions',
+                        title : '',
                         
                       }}
                   
@@ -75,7 +78,7 @@ export default function App() {
                       name = 'AddQuestion'
                       component={AddQuestion}
                       options = {{
-                        title : 'Add Questions',
+                        title : '',
                         
                       }}
                   
@@ -96,6 +99,7 @@ export default function App() {
             
         />
       </>
+    </ContextProvider>
     </Provider>
   );
 }

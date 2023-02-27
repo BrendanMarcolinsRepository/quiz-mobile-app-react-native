@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState, useContext } from "react"
 import { FlatList, StyleSheet, Text, View } from "react-native"
-import UniversalButton from "../UI/UniversalButton"
 import AnswerList from "./AnswerList"
 import QuizItem from "./QuizItem"
+import QuizReview from "./QuizReview"
+import { Context } from "../../context/QuestionNumberContext/numbercontext"
 
 
 
@@ -14,6 +15,7 @@ function QuizList({data}){
     const [gameState, setGameState] = useState(true)
     const [score, setScore] = useState(0)
     const [userAnswers, setUserAnswers] = useState([]) 
+    const { toggleCheckHandler} = useContext(Context)
 
 
     function updateCurrentHandler(answer){
@@ -21,8 +23,13 @@ function QuizList({data}){
         console.log('correct ' + data[currentQuestion].correctAnswer)
         console.log('user  ' + answer) 
 
+        toggleCheckHandler(currentQuestion)
+
         setUserAnswers(prev => [...prev, {
-            correctAnswer : data[currentQuestion].correctAnswer, userAnswer : answer}])
+            correctAnswer : data[currentQuestion].correctAnswer,
+            userAnswer : answer,
+            question : data[currentQuestion].question
+        }])
 
 
         if(answer.match(data[currentQuestion].correctAnswer)){
@@ -34,6 +41,14 @@ function QuizList({data}){
         }else{
             setCurrentQuestion(prev => prev + 1)
         }
+    }
+
+    function gameStateFunction(){
+        setCurrentQuestion(0)
+        setCurrentAnswers([])
+        setScore(0)
+        setGameState(true)
+        setUserAnswers([])
     }
 
   
@@ -51,50 +66,27 @@ function QuizList({data}){
         setCurrentAnswers(tempAnswers)
     },[currentQuestion])
 
+
     if(!gameState){
 
-        function gameStateFunction(){
-            setGameState(true)
-        }
-
         return(
-            <View>
-                <Text>finished, Score is : {score}</Text>
-
-                <FlatList 
-                    style = {styles.list}
-                    data={userAnswers}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem = {({item}) => (
-                    
-
-                        <View>
-                            <Text>Correct Answer : {item.correctAnswer}</Text>
-                            <Text>Your Answer : {item.userAnswer}</Text>
-                            <UniversalButton
-                                onPress={gameStateFunction}
-                            >
-                                Play Again
-                            </UniversalButton>
-                        
-                        </View>
-
-
-
-                        
-                    )}
-                />
-            </View>
+            <QuizReview  
+                score = {score}
+                userAnswers = {userAnswers}
+                onPress = {gameStateFunction}
+            />
         )
     }
 
 
     return (
         <View style = {styles.emptyContainer}>
-            <Text style = {styles.categoryText}>Category: {data[currentQuestion].category}</Text>
+            <View style = {styles.containerTextCategory}>
+                <Text style = {styles.questionText}>{currentQuestion+1}.</Text>
+                <Text style = {styles.questionText}>{data[currentQuestion].question}</Text>
+            </View>
+            
             <View style = {styles.textContainer}>
-                
-                <Text style = {styles.questionText}>Question: {data[currentQuestion].question}</Text>
             
                 <FlatList 
                     style = {styles.list}
@@ -125,25 +117,33 @@ const styles = StyleSheet.create({
 
     list : {
         margin : 20,
-        top : 0,
-        
-
     },
 
     emptyContainer : {
-        backgroundColor : 'grey',
-        flex  : 1,
-        flexDirection : 'column'
+        flexDirection : 'column',
+        marginTop : 50,
+        backgroundColor : 'blue',
+        borderRadius : 10,
+        height : 450, 
+        marginTop : 110,
+        alignItems : 'center',
+        margin : 10, 
       
     },
 
     textContainer : {
-        backgroundColor : 'blue',
-        padding : 10,
-        marginVertical : 100,
+        height : 300,
+        width : 350,
         
+    },
+
+    containerTextCategory : {
+        padding : 20,
+        height : 120,
+        width : 350,
+        alignItems : 'flex-start',
+        justifyContent : 'flex-start',
         
-      
     },
 
     emptyText : {
@@ -176,7 +176,10 @@ const styles = StyleSheet.create({
         fontSize : 18,
         alignItems : 'center',
         justifyContent : 'center',
-    }
+        paddingVertical : 3
+    },
+
+    
 
     
     
