@@ -1,30 +1,31 @@
 import { FlatList, Text, View, StyleSheet, ScrollView} from "react-native"
 import LeaderboardsItem from "../components/leaderboardsItems/leaderboardItems"
 import LeaderboardsTop from "../components/leaderboardsItems/leaderboardsTop";
+import { Ionicons } from '@expo/vector-icons';
 
 const leaderData = [
     {
-        name : 'random1',
+        name : 'Brendan',
         points: 1000,
     },
     {
-        name : 'random2',
+        name : 'Shane',
         points: 1000,
     },
     {
-        name : 'random3',
+        name : 'Joel',
         points: 1000,
     },
     {
-        name : 'random4',
+        name : 'Ellie',
         points: 1000,
     },
     {
-        name : 'random5',
+        name : 'Phoebe',
         points: 1000,
     },
     {
-        name : 'random6',
+        name : 'John',
         points: 1000,
     },
 ];
@@ -33,25 +34,24 @@ function Leaderboards(){
     return (
         <View style = {styles.container}>
            <View style = {styles.topContainer} >
-                
-                <LeaderboardsTop
-                    name = {'random2'}
-                    points = {1000}
-                    position = {2}
+                <Ionicons 
+                    name = {"trophy"}
+                    size = {125}
+                    color = 'silver'
+                                    
                 />
-
-                <LeaderboardsTop
-                    name = {'random1'}
-                    points = {1000}
-                    position = {1}
+                <Ionicons 
+                    name = {"trophy"}
+                    size = {150}
+                    color = 'gold'
+                                    
                 />
-                
-                <LeaderboardsTop
-                    name = {'random3'}
-                    points = {1000}
-                    position = {3}
+                <Ionicons 
+                    name = {"trophy"}
+                    size = {100}
+                    color = 'brown'
+                                    
                 />
-
             </View>
            <View   style = {styles.leaderitemScroll}>
                 <FlatList 
@@ -65,6 +65,7 @@ function Leaderboards(){
                                 <LeaderboardsItem
                                     name = {item.name}
                                     points = {item.points}
+                                    
                                     
                                 />
                             </ScrollView>
@@ -89,14 +90,14 @@ const styles = StyleSheet.create({
 
     topContainer : {
         flexDirection : 'row',
-        top : 20,
-        right : 340,
-        paddingLeft : 350
+        marginHorizontal : 10
+      
 
     },
 
     leaderitemScroll : {
-        height : 380
+
+        height : 375
     }
    
   })

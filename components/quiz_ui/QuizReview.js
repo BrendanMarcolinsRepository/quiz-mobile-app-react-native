@@ -14,8 +14,12 @@ function QuizReview({score, userAnswers,question, onPress}){
 
     return(
         <View style = {styles.container}>
-                <View style = {styles.scoreTextContainer}>
-                    <Text>Score: {score}</Text>
+                <View style = {styles.scoreTextOutterContainer}> 
+                    <View style = {styles.scoreTextMiddleContainer}>    
+                        <View style = {styles.scoreTextInnerContainer}>
+                            <Text style = {styles.scoreText}>{score}</Text>
+                        </View>
+                    </View>
                 </View>
                 
                 <ScrollView  style = {styles.containerList}>
@@ -26,9 +30,11 @@ function QuizReview({score, userAnswers,question, onPress}){
                         keyExtractor={(item, index) => index.toString()}
                         renderItem = {({item}) => (
                                 <View style = {styles.resultsContainer}>
-                                    <Text style = {styles.textCard}>Question : {item.question}</Text>
-                                    <Text style = {styles.textCard}>Correct Answer : {item.correctAnswer}</Text>
-                                    <Text style = {styles.textCard}>Your Answer : {item.userAnswer}</Text>
+                                    <Text style = {styles.textQuestionCard}>Question : {item.question}</Text>
+                                    <View  style = {styles.answersContainer}>
+                                        <Text style = {styles.textCard}>Correct Answer : {item.correctAnswer}</Text>
+                                        <Text style = {styles.textCard}>Your Answer : {item.userAnswer}</Text>
+                                    </View>
                                 </View>
                         )}
                     />
@@ -59,18 +65,17 @@ const styles = StyleSheet.create({
     },
 
     containerList: {
-        marginTop: 70
+        marginTop: 80,
+        marginHorizontal : 20,
         
         
     },
    
     resultsContainer : {
-        height : 200,
+        height : 250,
         width : 350,
         borderRadius : 10,
-        justifyContent :'center',
-        alignItems : 'center',
-        alignContent : "center",
+        
         backgroundColor : 'blue',
         padding : 20,
         marginVertical : 10
@@ -78,25 +83,87 @@ const styles = StyleSheet.create({
 
     },
 
-    scoreTextContainer : {
-        padding : 20,
-        top : 50
+    answersContainer : {
+        height : 150,
+        width : 250,
+        borderRadius : 10,
+        justifyContent :'center',
+        alignItems : 'center',
+        alignContent : "center",
+        backgroundColor : 'red',
+        marginVertical : 10,
+        marginHorizontal : 30
         
 
+    },
+
+    scoreTextOutterContainer : {
+        marginHorizontal : 120,
+        top : 50,
+        justifyContent : "center",
+        alignContent : 'center',
+        borderRadius : 1000,
+        width : 150,
+        height : 150,
+        backgroundColor : '#d6cce4',
+        elevation : 5
+        
+        
+
+    },
+
+    scoreTextMiddleContainer : {
+        marginHorizontal : 12,
+        justifyContent : "center",
+        alignContent : 'center',
+        borderRadius : 1000,
+        width : 125,
+        height : 125,
+        backgroundColor : 'lightblue',
+        
+        
+
+    },
+
+    scoreTextInnerContainer : {
+        marginHorizontal : 12,
+        alignItems : 'center',
+        borderRadius : 1000,
+        width : 100,
+        height : 100,
+        backgroundColor : '#d6cce4',
+        justifyContent : "center",
+        
+        
+        
+
+    },
+
+    scoreText : {
+       
+        fontSize : 20
+        
+
+    },
+
+    textQuestionCard : {
+        
+        color : 'white'
     },
     
     textCard : {
         textAlign : 'left',
-        color : 'white'
+        color : 'white',
+        
     },
 
     buttonContainer : {
-        marginHorizontal : 25,
+        marginHorizontal : 125,
         top : 30
     },
    
     button : {
-        width : 300,
+        width : 150,
         paddingVertical : 15,
         backgroundColor : '#d6cce4',
         alignItems : 'center',

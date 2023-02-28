@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         backgroundColor : 'lightblue',
         paddingVertical : 10,
         margin : 10,
-        borderRadius : 10
+        borderRadius : 10,
     },
 
     textContainer : {
@@ -40,8 +40,11 @@ const styles = StyleSheet.create({
     },
 
     arrowContainer : {
+        marginLeft : 'auto',
         justifyContent : 'center',
-        paddingLeft : '65%'
+        paddingRight : 10
+        
+        
     },
 
     textUsername : {

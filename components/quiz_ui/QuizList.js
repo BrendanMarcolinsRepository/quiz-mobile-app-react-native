@@ -7,12 +7,11 @@ import { Context } from "../../context/QuestionNumberContext/numbercontext"
 
 
 
-function QuizList({data, update, loading}){
+function QuizList({data, update, loading, setGameState, gameState}){
 
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [currentAnswers, setCurrentAnswers] = useState([])
-    const [gameState, setGameState] = useState(true)
     const [score, setScore] = useState(0)
     const [userAnswers, setUserAnswers] = useState([]) 
     const {toggleCheckHandler, resetQuestionNumber} = useContext(Context)
