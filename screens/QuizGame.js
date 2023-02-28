@@ -31,15 +31,10 @@ function QuizGame({route}){
     })
     */
 
-    useEffect(() => {
-        if(progressionChecked){
-            console.log('WORKKING ' + progressionChecked)
-            progressionCheckedHandler(false)
-            resetQuestionNumber()
-        }
-          
-    }, [route]);
      
+    function update(){
+        getQuizData()
+    }
 
    
    
@@ -60,6 +55,10 @@ function QuizGame({route}){
             />
             <QuizList 
                 data = {data} 
+                update={update}
+                loading = {loading}
+                
+                
             />
         </View>
     )

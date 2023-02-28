@@ -8,12 +8,8 @@ function ContextProvider({children}){
     const [questionNumber,setQuestionNumber] = useState([])
     const [progressionChecked, setProgressionChecked] = useState(false)
 
-    function progressionCheckedHandler(toggle){
-        console.log('toggle 1' + progressionChecked)
-        console.log('toggle 1' + toggle)
-        setProgressionChecked(toggle)
-        console.log('toggle 2' + progressionChecked)
-        console.log('toggle 2' + toggle)
+    function progressionCheckedHandler(){
+        setProgressionChecked(true)
     }
 
     function checkedHandler(questionNumbers){
@@ -36,6 +32,10 @@ function ContextProvider({children}){
     
     function resetQuestionNumber(){
         setQuestionNumber([])
+        setProgressionChecked(false)
+
+        console.log('progression ==== ' + progressionChecked)
+        console.log('question number ==== ' + questionNumber)
     }
 
     return (

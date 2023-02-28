@@ -1,13 +1,13 @@
 import { useEffect, useLayoutEffect, useState, useContext } from "react"
 import { FlatList, StyleSheet, Text, View } from "react-native"
-import AnswerList from "./AnswerList"
+import AppLoading from 'expo-app-loading';
 import QuizItem from "./QuizItem"
 import QuizReview from "./QuizReview"
 import { Context } from "../../context/QuestionNumberContext/numbercontext"
 
 
 
-function QuizList({data}){
+function QuizList({data, update, loading}){
 
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -15,7 +15,7 @@ function QuizList({data}){
     const [gameState, setGameState] = useState(true)
     const [score, setScore] = useState(0)
     const [userAnswers, setUserAnswers] = useState([]) 
-    const { toggleCheckHandler} = useContext(Context)
+    const {toggleCheckHandler, resetQuestionNumber} = useContext(Context)
 
 
     function updateCurrentHandler(answer){
@@ -49,6 +49,8 @@ function QuizList({data}){
         setScore(0)
         setGameState(true)
         setUserAnswers([])
+        update()
+        resetQuestionNumber()
     }
 
   
@@ -64,7 +66,7 @@ function QuizList({data}){
             }
         }
         setCurrentAnswers(tempAnswers)
-    },[currentQuestion])
+    },[currentQuestion,data])
 
 
     if(!gameState){
@@ -74,8 +76,15 @@ function QuizList({data}){
                 score = {score}
                 userAnswers = {userAnswers}
                 onPress = {gameStateFunction}
+                
             />
         )
+    }
+
+    if(loading){
+        return <AppLoading 
+            
+        />
     }
 
 

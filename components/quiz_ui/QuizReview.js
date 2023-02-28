@@ -5,12 +5,10 @@ import { useContext } from "react"
 
 function QuizReview({score, userAnswers,question, onPress}){
 
-    const {progressionChecked, progressionCheckedHandler, resetQuestionNumber} = useContext(Context)
-
+    
 
     function playagain(){
-        resetQuestionNumber()
-        progressionCheckedHandler(false)
+        
         onPress()
     }
 

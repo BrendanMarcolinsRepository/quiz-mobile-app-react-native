@@ -16,7 +16,7 @@ function Progression({questionNumbers}){
             progressionCheckedHandler()
         }
         
-    }, [])
+    }, [progressionChecked])
 
     return(
         <View style = {styles.container}>
