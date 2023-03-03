@@ -4,7 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import Dropdown from "../components/UI/Dropdown";
 import UniversalButton from "../components/UI/UniversalButton";
-import {updateQuestionNumber,updateCategoryNumber,updateGameDifficulty} from "../redux/GameStateRedux"
+import {updateQuestionNumber,updateCategoryNumber,updateGameDifficulty, updateTime} from "../redux/GameStateRedux"
 import {useDispatch} from "react-redux"
 
 const data = [{
@@ -32,12 +32,15 @@ const data = [{
   const data2 = [{
     label : 'Hard',
     value: 'hard',
+    time : 10
   }, {
     label: 'Medium',
-    value : 'medium'
+    value : 'medium',
+    time : 15
   }, {
     label: 'Easy',
-    value : 'easy'
+    value : 'easy',
+    time : 20
   }];
 
 function Homepage({navigation}){
@@ -57,15 +60,15 @@ function Homepage({navigation}){
     const [pickedCategory, setPickedCategory] = useState(null)
     const [pickedDifficulty, setPickedDifficulty] = useState(null)
     const [pickedQuestion, setPickedQuestion] = useState(null)
+    const [time, setTime] = useState(null)
 
     const dispatch = useDispatch()
    
     function startQuizHandler(){
 
         navigation.navigate('QuizGame', {
-            category : pickedCategory,
-            question : pickedQuestion,
-            difficulty : pickedDifficulty
+            time : time
+
         })
     }
 
@@ -86,6 +89,7 @@ function Homepage({navigation}){
 
      function onChangeDifficulty(item){
         dispatch(updateGameDifficulty(item.value))
+        dispatch(updateTime(item.time))
         
      }
 

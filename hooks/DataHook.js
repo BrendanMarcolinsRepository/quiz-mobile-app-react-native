@@ -18,7 +18,7 @@ function DataHook(){
     useEffect(() => {
         
         if(!renderAfterCalled.current){
-            getQuizData()
+            getQuizData()  
         }
         renderAfterCalled.current = true;
        
@@ -48,7 +48,9 @@ function DataHook(){
                         difficulty: difficulty,
                         question: questionUpdate,
                         answers: shuffle([correct_answer, ...incorrect_answers]),
-                        correctAnswer: correct_answer
+                        correctAnswer: correct_answer,
+                        time : gameSetup.gameSetupInformation.time,
+                        
                         
                     }
         }))

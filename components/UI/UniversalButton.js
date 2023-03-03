@@ -1,10 +1,17 @@
+import { useState } from "react"
 import { Pressable, Text, StyleSheet} from "react-native"
 
-function UniversalButton({children, onPress, customStyle}){
+function UniversalButton({children, onPress, customStyle, answered}){
+
+    
+    console.log('here man' + answered)
+   
+    const universalStyles = customStyle ? customStyle : styles.button
 
     return(
         <Pressable
-        style = {(pressed) => [customStyle ? customStyle : styles.button , pressed && styles.pressed]}
+        disabled = {answered}
+        style = {universalStyles}
         onPress = {onPress.bind(this,children)}
     >
         <Text style = {styles.text}>

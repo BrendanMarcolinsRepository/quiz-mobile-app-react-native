@@ -39,10 +39,24 @@ export function updateGameDifficulty(value){
     }
 }
 
+export function updateTime(value){
+    const time = value
+    console.log("update d")
+    return (dispatch) => {
+        dispatch(() => {
+            dispatch({
+                type : "TIME",
+                payload : time
+            })
+        })
+    }
+}
+
 const initialState = {
     questionNumbers: 0,
     cateogoryNumbers: 0,
-    difficulty : "easy"
+    difficulty : "easy", 
+    time : 20
     
 }
 
@@ -63,6 +77,11 @@ export default function gameSetupReducer(gameReducers = initialState, action){
             return {
                 ...gameReducers,
                 difficulty : action.payload
+            }
+        case "TIME" :
+            return {
+                ...gameReducers,
+                time : action.payload
             }
         default :
             return gameReducers;
